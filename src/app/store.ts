@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import productsReducer from '@features/products/products.slice';
 import cartReducer from '@features/cart/cart.slice';
-import currencyReducer from '@features/currency/currency.slice';
+import salesReducer from '@features/sales/sales.slice';
 import Reactotron from '../../ReactotronConfig';
 
 export const store = configureStore({
   reducer: {
     products: productsReducer,
     cart: cartReducer,
-    currency: currencyReducer,
+    sales: salesReducer,
   },
   enhancers: (getDefaultEnhancers) =>
     __DEV__ ? getDefaultEnhancers().concat(Reactotron.createEnhancer!()) : getDefaultEnhancers(),
