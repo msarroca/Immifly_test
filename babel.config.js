@@ -11,6 +11,8 @@ module.exports = {
           '@screens': './src/screens',
           '@components': './src/components',
           '@lib': './src/lib',
+          '@constants': './src/constants',
+          '@helpers': './src/helpers',
         },
       },
     ],

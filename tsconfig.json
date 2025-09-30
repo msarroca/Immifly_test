@@ -10,7 +10,9 @@
       "@features/*": ["features/*"],
       "@screens/*": ["screens/*"],
       "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@constants/*": ["constants/*"],
+      "@helpers/*": ["helpers/*"]
     }
   },
   "include": ["src", "App.tsx"],
