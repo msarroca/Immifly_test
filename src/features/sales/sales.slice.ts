@@ -1,24 +1,14 @@
-// src/features/sales/sales.slice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CURRENCIES, SALE_TYPES } from '@constants/sales';
+import { processPayment } from './thunks';
+import { Currency, SalesState, SaleType } from '@models/index';
+import { STATUS } from '@constants/status';
 
-export type Currency = (typeof CURRENCIES)[number]['key'];
-export type SaleType = (typeof SALE_TYPES)[number]['key'];
-
-const RATES: Record<Currency, number> = {
-  EUR: 1,
-  USD: 1.08,
-  GBP: 0.85,
-};
-
-type SalesState = {
-  currency: Currency;
-  saleType: SaleType;
-};
+const { initial, loading, succeded, failed } = STATUS;
 
 const initialState: SalesState = {
   currency: 'EUR',
   saleType: 'RETAIL',
+  status: initial,
 };
 
 const salesSlice = createSlice({
@@ -32,11 +22,23 @@ const salesSlice = createSlice({
       state.saleType = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(processPayment.pending, (state) => {
+        state.status = loading;
+        state.error = undefined;
+      })
+      .addCase(processPayment.fulfilled, (state, action) => {
+        state.status = succeded;
+        state.lastMessage = action.payload.message;
+      })
+      .addCase(processPayment.rejected, (state, action) => {
+        state.status = failed;
+        state.error = action.error.message;
+      });
+  },
 });
 
 export const { setCurrency, setSaleType } = salesSlice.actions;
-
-export const convert = (valueEUR: number, currency: Currency) =>
-  new Intl.NumberFormat('en', { style: 'currency', currency }).format(valueEUR * RATES[currency]);
 
 export default salesSlice.reducer;

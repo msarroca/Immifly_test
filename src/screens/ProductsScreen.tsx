@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useAppDispatch, useAppSelector } from '@app/store';
-import { fetchProducts, Product } from '@features/products/products.slice';
+import { Product } from '@features/products/products.slice';
+import { fetchProducts } from '@features/products/thunks';
 import CartSummaryBar from '../features/cart/cartSummaryBar';
 
 import {
@@ -21,7 +22,6 @@ import {
 
 const ProductsScreen = () => {
   const dispatch = useAppDispatch();
-  const [showCart, setShowCart] = useState(false);
   const { items, status, error } = useAppSelector((state) => state.products);
   const cart = useAppSelector((state) => state.cart.items);
 
@@ -89,7 +89,7 @@ const ProductsScreen = () => {
         renderItem={renderItem}
         contentContainerStyle={styles.list}
       />
-      <CartSummaryBar onPress={() => setShowCart(true)} />
+      <CartSummaryBar />
     </>
   );
 };

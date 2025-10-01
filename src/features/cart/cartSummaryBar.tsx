@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 import { calculateTotalEUR } from '@helpers/index';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '@models/index';
 import { useAppSelector, useAppDispatch } from '@app/store';
 import { CURRENCIES, SALE_TYPES } from '@constants/sales';
-import { setCurrency, setSaleType, convert, Currency, SaleType } from '@features/sales/sales.slice';
+import { setCurrency, setSaleType } from '@features/sales/sales.slice';
+import { convertRates } from '@helpers/index';
+import { SaleType, Currency } from '@models/index';
 import PickerModal from '@components/PickerModal';
+import { PATH } from '@constants/navigation';
 
-type Props = { onPress: () => void };
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Products'>;
 
-const CartSummaryBar = ({ onPress }: Props) => {
+const CartSummaryBar = () => {
   const dispatch = useAppDispatch();
-  const { items } = useAppSelector((s) => s.cart);
-  const { currency, saleType } = useAppSelector((s) => s.sales);
+  const navigation = useNavigation<NavigationProp>();
 
+  const { items } = useAppSelector((state) => state.cart);
+  const { currency, saleType } = useAppSelector((state) => state.sales);
   const [isCurrencyModal, setCurrencyModal] = useState(false);
   const [isSaleModal, setSaleModal] = useState(false);
 
@@ -26,7 +33,7 @@ const CartSummaryBar = ({ onPress }: Props) => {
   return (
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <View style={[styles.container, styles.row]}>
-        <Text style={styles.total}>{convert(totalEUR, currency)}</Text>
+        <Text style={styles.total}>{convertRates(totalEUR, currency)}</Text>
 
         <TouchableOpacity style={styles.pickerButton} onPress={() => setCurrencyModal(true)}>
           <Text style={styles.pickerTxt}>{currentCurrency?.label}</Text>
@@ -36,7 +43,10 @@ const CartSummaryBar = ({ onPress }: Props) => {
           <Text style={styles.pickerTxt}>{currentSale?.label}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate(PATH.TicketScreen)}
+        >
           <Text style={styles.buttonTxt}>Pagar</Text>
         </TouchableOpacity>
       </View>

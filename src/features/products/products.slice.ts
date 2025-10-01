@@ -1,17 +1,12 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { fetchProductsAPI, Product } from './products.api';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Product } from '@models/index';
+import { fetchProducts } from './thunks';
+import { STATUS } from '@constants/status';
+import { ProductsState } from '@models/index';
 
-type ProductsState = {
-  items: Product[];
-  status: 'initial' | 'loading' | 'succeeded' | 'failed';
-  error?: string;
-};
+const { initial, loading, succeded, failed } = STATUS;
 
-const initialState: ProductsState = { items: [], status: 'initial' };
-
-export const fetchProducts = createAsyncThunk('products/fetchAll', async () => {
-  return await fetchProductsAPI();
-});
+const initialState: ProductsState = { items: [], status: initial };
 
 const productsSlice = createSlice({
   name: 'products',
@@ -19,15 +14,15 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: (b) => {
     b.addCase(fetchProducts.pending, (state) => {
-      state.status = 'loading';
+      state.status = loading;
       state.error = undefined;
     });
     b.addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
-      state.status = 'succeeded';
+      state.status = succeded;
       state.items = action.payload;
     });
     b.addCase(fetchProducts.rejected, (state, action) => {
-      state.status = 'failed';
+      state.status = failed;
       state.error = action.error.message || 'Error fetching products';
     });
   },

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal, Pressable, Text, View, StyleSheet } from 'react-native';
 
 type Item = { key: string; label: string };
