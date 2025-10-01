@@ -12,7 +12,8 @@
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
       "@constants/*": ["constants/*"],
-      "@helpers/*": ["helpers/*"]
+      "@helpers/*": ["helpers/*"],
+      "@models/*": ["models/*"]
     }
   },
   "include": ["src", "App.tsx"],
