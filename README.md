@@ -106,20 +106,8 @@ npm test
 ```
 
 ### Example test implemented:
-- Full flow:
-  1. Add product from ProductsScreen.
-  2. Navigate to TicketScreen.
-  3. Pay with cash.
-  4. Validate success message.
-
----
-
-## 🧩 Possible Improvements
-
-- Connect to a real products/payments API.
-- User management & persistence with AsyncStorage.
-- Custom animations for modals.
-- Light/Dark theme support.
+  1. ProductsScreen.
+  2. TicketScreen.
 
 ---
 
