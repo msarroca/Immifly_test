@@ -97,6 +97,7 @@ const TicketScreen = () => {
           setSelectedItem(item);
           setShowModal(true);
         }}
+        testID="product"
       >
         <Image source={{ uri: item.product.image }} style={styles.image} />
         <View style={{ flex: 1 }}>
@@ -137,7 +138,9 @@ const TicketScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <Text style={styles.total}>{convertRates(totalEUR, currency)}</Text>
+          <Text testID="total" style={styles.total}>
+            {convertRates(totalEUR, currency)}
+          </Text>
         </View>
 
         <View style={styles.payRow}>

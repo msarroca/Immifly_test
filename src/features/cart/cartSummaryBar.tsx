@@ -33,7 +33,9 @@ const CartSummaryBar = () => {
   return (
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <View style={[styles.container, styles.row]}>
-        <Text style={styles.total}>{convertRates(totalEUR, currency)}</Text>
+        <Text style={styles.total} testID="total">
+          {convertRates(totalEUR, currency)}
+        </Text>
 
         <TouchableOpacity style={styles.pickerButton} onPress={() => setCurrencyModal(true)}>
           <Text style={styles.pickerTxt}>{currentCurrency?.label}</Text>
@@ -46,6 +48,7 @@ const CartSummaryBar = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate(PATH.TicketScreen)}
+          testID="pay-button"
         >
           <Text style={styles.buttonTxt}>Pagar</Text>
         </TouchableOpacity>

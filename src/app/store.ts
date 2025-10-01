@@ -3,7 +3,12 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import productsReducer from '@features/products/products.slice';
 import cartReducer from '@features/cart/cart.slice';
 import salesReducer from '@features/sales/sales.slice';
-import Reactotron from '../../ReactotronConfig';
+
+let Reactotron: any = null;
+// @ts-ignore
+if (__DEV__ && process.env.JEST_WORKER_ID === undefined) {
+  Reactotron = require('../../ReactotronConfig').default;
+}
 
 export const store = configureStore({
   reducer: {
@@ -12,11 +17,12 @@ export const store = configureStore({
     sales: salesReducer,
   },
   enhancers: (getDefaultEnhancers) =>
-    __DEV__ ? getDefaultEnhancers().concat(Reactotron.createEnhancer!()) : getDefaultEnhancers(),
+    __DEV__ && Reactotron
+      ? getDefaultEnhancers().concat(Reactotron.createEnhancer!())
+      : getDefaultEnhancers(),
   devTools: __DEV__,
 });
 
-// Tipos para TypeScript
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

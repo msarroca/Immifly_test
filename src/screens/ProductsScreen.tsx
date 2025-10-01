@@ -64,6 +64,7 @@ const ProductsScreen = () => {
               <TouchableOpacity
                 style={styles.actionBtn}
                 onPress={() => dispatch(increaseQuantity(item.id))}
+                testID="delete"
               >
                 <Text style={styles.btnTxt}>+</Text>
               </TouchableOpacity>
