@@ -2,7 +2,9 @@
 
 This project is the solution to the **Immfly technical test**.  
 It is a **React Native (0.81)** application built with **TypeScript** that simulates a shopping flow: product selection, cart management, and final payment.
-This app run well on Anroid an IOS
+
+
+###This app runs on Anroid an IOS. 
 
 ---
 
