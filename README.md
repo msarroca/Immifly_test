@@ -1,97 +1,132 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🛒 Immfly Test - React Native Challenge
 
-# Getting Started
+This project is the solution to the **Immfly technical test**.  
+It is a **React Native (0.81)** application built with **TypeScript** that simulates a shopping flow: product selection, cart management, and final payment.
+This app run well on Anroid an IOS
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 Tech Stack
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **React Native 0.81**
+- **TypeScript**
+- **Redux Toolkit** for global state management
+- **React Navigation** (native stack) for navigation
+- **React Native Gesture Handler** for gestures (swipe to delete)
+- **Reactotron** for Redux and network debugging
+- **Jest + React Native Testing Library** for testing
+- **Prettier + ESLint** for linting and code formatting
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
-npm start
+## 📂 Project Structure
 
-# OR using Yarn
-yarn start
+```
+src/
+ ├── app/              # Store and global configuration
+ ├── components/       # Reusable components (e.g. PickerModal, ProductQuantityModal)
+ ├── constants/        # Global constants (Currencies, SaleTypes, etc.)
+ ├── features/         # Features with slices and thunks
+ │    ├── cart/        # Cart state and logic
+ │    ├── products/    # Products state and logic
+ │    └── sales/       # Sales state, currency, payment
+ ├── models/           # Global app types
+ ├── screens/          # Main screens (Products, Ticket)
+ ├── helpers           # Helpers and utilities
+ ├── models/           # Typescript types
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 📱 Features
 
-### Android
+### Screen 1: Products
+- Displays a product list fetched.
+- Add products to cart.
+- Increase / decrease product quantities.
+- Remove products from cart.
+- **CartSummaryBar** (bottom modal) that:
+  - Shows total in current currency.
+  - Allows switching between EUR/USD/GBP.
+  - "Pay" button → navigates to Ticket screen.
 
-```sh
-# Using npm
-npm run android
+### Screen 2: Ticket
+- Displays selected products.
+- **Swipe gesture** to remove products.
+- Tap on product → open modal to change quantity.
+- Row & seat picker using **PickerModal**.
+- Real-time total calculation.
+- Payment buttons:
+  - **Cash**
+  - **Card**
+- Both simulate a payment by dispatching the `processPayment` thunk which always returns `200 OK`.
 
-# OR using Yarn
-yarn android
-```
+---
+
+## ⚙️ Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd Immfly_test
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Install iOS pods:
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+---
+
+## ▶️ Run the App
 
 ### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Android
+```bash
+npm run android
+```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+## 🧪 Testing
 
-Now that you have successfully run the app, let's make changes!
+The project includes integration tests with **Jest + React Native Testing Library**:
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```bash
+npm test
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Example test implemented:
+- Full flow:
+  1. Add product from ProductsScreen.
+  2. Navigate to TicketScreen.
+  3. Pay with cash.
+  4. Validate success message.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+---
 
-## Congratulations! :tada:
+## 🧩 Possible Improvements
 
-You've successfully run and modified your React Native App. :partying_face:
+- Connect to a real products/payments API.
+- User management & persistence with AsyncStorage.
+- Custom animations for modals.
+- Light/Dark theme support.
 
-### Now what?
+---
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## 👨‍💻 Author
 
-# Troubleshooting
+**Marc Sarroca Díaz**  
+Frontend & Mobile Developer  
+[LinkedIn](https://www.linkedin.com/in/marcsarroca-diaz/) | [GitHub](https://github.com/)
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
