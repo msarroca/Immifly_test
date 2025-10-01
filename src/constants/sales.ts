@@ -11,3 +11,9 @@ export const SALE_TYPES = [
   { key: 'BUSINESS', label: 'Invitación Business' },
   { key: 'TOURIST', label: 'Invitación Turista' },
 ] as const;
+
+export const RATES = {
+  EUR: 1,
+  USD: 1.08,
+  GBP: 0.85,
+};
