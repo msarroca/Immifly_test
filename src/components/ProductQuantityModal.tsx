@@ -2,17 +2,15 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useAppDispatch } from '@app/store';
 import { increaseQuantity, decreaseQuantity, removeFromCart } from '@features/cart/cart.slice';
 import { convertRates } from '@helpers/index';
-import { Currency } from '@models/index';
+import { ProductQuantityModalProps } from '@models/index';
 
-type Props = {
-  visible: boolean;
-  onClose: () => void;
-  product: any | null;
-  quantity: number;
-  currency: Currency;
-};
-
-const ProductQuantityModal = ({ visible, onClose, product, quantity, currency }: Props) => {
+const ProductQuantityModal = ({
+  visible,
+  onClose,
+  product,
+  quantity,
+  currency,
+}: ProductQuantityModalProps) => {
   const dispatch = useAppDispatch();
 
   if (!product) return null;

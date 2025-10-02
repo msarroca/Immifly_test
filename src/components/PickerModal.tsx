@@ -1,15 +1,5 @@
 import { Modal, Pressable, Text, View, StyleSheet } from 'react-native';
-
-type Item = { key: string; label: string };
-
-type PickerModalProps = {
-  visible: boolean;
-  title: string;
-  items: readonly Item[];
-  selectedKey: string;
-  onSelect: (key: string) => void;
-  onClose: () => void;
-};
+import { PickerModalProps } from '@models/index';
 
 const PickerModal = ({
   visible,

@@ -37,3 +37,22 @@ export type SaleType = (typeof SALE_TYPES)[number]['key'];
 export type PaymentError = {
   message: string;
 };
+
+export type Item = { key: string; label: string };
+
+export type PickerModalProps = {
+  visible: boolean;
+  title: string;
+  items: readonly Item[];
+  selectedKey: string;
+  onSelect: (key: string) => void;
+  onClose: () => void;
+};
+
+export type ProductQuantityModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  product: any | null;
+  quantity: number;
+  currency: Currency;
+};
