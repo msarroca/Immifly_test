@@ -117,6 +117,6 @@ npm test
 
 **Marc Sarroca Díaz**  
 Frontend & Mobile Developer  
-[LinkedIn](https://www.linkedin.com/in/marcsarroca-diaz/) | [GitHub](https://github.com/)
+[LinkedIn](https://www.linkedin.com/in/msarroca-diaz) | [GitHub](https://github.com/)
 
 ---
